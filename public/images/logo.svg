@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 120">
+  <!-- Shield with African pattern (Left) -->
+  <g transform="translate(20,20)">
+    <!-- Shield base -->
+    <path d="M0 20L40 0l40 20v40l-40 20-40-20V20z" fill="#4CAF50"/>
+    
+    <!-- African pattern stripes -->
+    <path d="M0 20l40-20 40 20-40 20z" fill="#2E7D32" opacity="0.7"/>
+    <path d="M40 40l40-20v40l-40 20z" fill="#2E7D32" opacity="0.5"/>
+    
+    <!-- Veterinary cross -->
+    <path d="M30 30h20v20H30z" fill="#FFEB3B"/>
+    <path d="M20 40h40v20H20z" fill="#FFEB3B"/>
+    
+    <!-- Livestock silhouette (cow) -->
+    <path d="M40 45c-5 0-7-3-7-7s2-7 7-7 7 3 7 7-2 7-7 7zm-3 10l-3 5h12l-3-5" fill="#5D4037"/>
+  </g>
+
+  <!-- "Veterial" text (Right) -->
+  <g transform="translate(120,60)">
+    <!-- Main wordmark -->
+    <text x="0" y="0" font-size="46" fill="#2E7D32" font-family="Arial, sans-serif" font-weight="bold">
+      Veterial
+    </text>
+    
+    <!-- Tagline -->
+    <text x="0" y="25" font-size="24" fill="#666" font-family="Arial, sans-serif">
+      Livestock Health Guardian
+    </text>
+    
+    <!-- Tech element underline -->
+    <path d="M0 30h170" stroke="#2196F3" stroke-width="2" stroke-dasharray="5,3"/>
+    
+    <!-- Small circuit nodes -->
+    <circle cx="160" cy="5" r="3" fill="#2196F3"/>
+    <circle cx="165" cy="15" r="2" fill="#2196F3"/>
+  </g>
+</svg>
