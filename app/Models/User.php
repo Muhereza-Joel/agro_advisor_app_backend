@@ -52,6 +52,6 @@ class User extends Authenticatable
 
     public function farmer()
     {
-        return $this->hasMany(Farmer::class);
+        return $this->hasOne(Farmer::class);
     }
 }

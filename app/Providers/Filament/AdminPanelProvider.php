@@ -18,6 +18,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Nuxtifyts\DashStackTheme\DashStackThemePlugin;
+use Hydrat\TableLayoutToggle\TableLayoutTogglePlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -28,6 +29,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('dashboard')
             ->path('dashboard')
             ->login()
+            ->darkMode(false)
             ->colors([
                 'primary' => Color::Green,
             ])
@@ -36,11 +38,17 @@ class AdminPanelProvider extends PanelProvider
             ->pages([
                 Pages\Dashboard::class,
             ])
+            ->registration(\App\Filament\Pages\Register::class)
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
-            ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
-            ])
+            ->widgets([])
+            ->theme(
+                asset('build/css/filament/style.css'),
+            )
+            ->brandName('Veterial')
+            ->brandLogo(asset('images/logo.svg'))
+            ->brandLogoHeight('4rem')
+            ->favicon(asset('images/favicon.png'))
+
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -54,13 +62,12 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ])->brandName('Filament Demo')
-            ->brandLogo(asset('images/logo.svg'))
-            ->brandLogoHeight('4rem')
+            ])->brandName('')
             ->favicon(asset('images/favicon.png'))
             ->plugins([
                 \TomatoPHP\FilamentMediaManager\FilamentMediaManagerPlugin::make()->allowSubFolders()->allowUserAccess(),
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
+                TableLayoutTogglePlugin::make(),
             ]);
     }
 }

@@ -62,21 +62,17 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('email')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('roles.name')
-                    ->label('Role')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\Layout\Split::make([
+                    Tables\Columns\TextColumn::make('name')
+                        ->searchable(),
+                    Tables\Columns\TextColumn::make('email')
+                        ->searchable(),
+                    Tables\Columns\TextColumn::make('roles.name')
+                        ->label('Role')
+                        ->sortable(),
+                ])->from('md')
+                    ->columnSpanFull(), // Ensures full row usage, // Ensure the split takes full width,
+
             ])
             ->filters([
                 //

@@ -18,5 +18,6 @@ Route::prefix('v1')->group(function () {
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('/diseases', [DiseaseController::class, 'index']);
+        Route::post('/logout', [AuthController::class, 'logout']);
     });
 });

@@ -8,6 +8,7 @@ use App\Models\DiseaseReport;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\FontFamily;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -113,43 +114,35 @@ class DiseaseReportResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('farmer_id')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('vet_id')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('disease_id')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('livestock_type'),
-                Tables\Columns\TextColumn::make('status'),
-                Tables\Columns\TextColumn::make('severity'),
-                Tables\Columns\TextColumn::make('village_id')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                Tables\Filters\TrashedFilter::make(),
-            ])
-            ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                    Tables\Actions\ForceDeleteBulkAction::make(),
-                    Tables\Actions\RestoreBulkAction::make(),
-                ]),
+
+                Tables\Columns\TextColumn::make('farmer.name')
+                    ->label('Reporter')
+                    ->searchable()
+                    ->columnSpanFull(),
+
+                Tables\Columns\TextColumn::make('severity')
+                    ->badge()
+                    ->color(fn(?string $state): string => match ($state) {
+                        'low' => 'gray',
+                        'medium' => 'warning',
+                        'high' => 'danger',
+                        'critical' => 'primary',
+                        null, '' => 'gray', // Handle null/empty cases
+                        default => 'gray',
+                    })
+                    ->formatStateUsing(fn(?string $state): string => $state ? ucfirst($state) : 'Unknown') // Handle null
+                    ->icon(fn(?string $state): ?string => match ($state) { // Nullable return
+                        'critical' => 'heroicon-o-exclamation-triangle',
+                        'high' => 'heroicon-o-exclamation-circle',
+                        default => null,
+                    })->columnSpanFull(),
+
+                Tables\Columns\TextColumn::make('village.name')
+                    ->label('Location')
+                    ->searchable()
+                    ->icon('heroicon-o-map-pin')
+                    ->color('gray')
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -167,6 +160,7 @@ class DiseaseReportResource extends Resource
             'create' => Pages\CreateDiseaseReport::route('/create'),
             'view' => Pages\ViewDiseaseReport::route('/{record}'),
             'edit' => Pages\EditDiseaseReport::route('/{record}/edit'),
+
         ];
     }
 

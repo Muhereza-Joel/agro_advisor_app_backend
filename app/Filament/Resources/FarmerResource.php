@@ -34,6 +34,8 @@ class FarmerResource extends Resource
             ->schema([
                 Forms\Components\Select::make('user_id')
                     ->required()
+                    ->searchable()
+                    ->preload()
                     ->relationship('farmer', 'name')
                     ->helperText('This is the farmer who owns the farm.'),
                 Forms\Components\TextInput::make('farm_name')
@@ -132,6 +134,21 @@ class FarmerResource extends Resource
             ]);
     }
 
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
+
+        // If the authenticated user is a farmer, only show their farms
+        if (auth()->check() && auth()->user()->hasRole('farmer')) {
+            return $query->where('user_id', auth()->id());
+        }
+
+        return $query;
+    }
+
     public static function getRelations(): array
     {
         return [
@@ -147,13 +164,5 @@ class FarmerResource extends Resource
             'view' => Pages\ViewFarmer::route('/{record}'),
             'edit' => Pages\EditFarmer::route('/{record}/edit'),
         ];
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ]);
     }
 }

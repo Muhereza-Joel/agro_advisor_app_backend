@@ -134,9 +134,21 @@ class FarmRecordResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ]);
+        $query = parent::getEloquentQuery()->withoutGlobalScopes([
+            SoftDeletingScope::class,
+        ]);
+
+        // if (auth()->check() && auth()->user()->hasRole('farmer')) {
+        //     $farmer = auth()->user()->farmer; // assumes User hasOne Farmer
+
+        //     if ($farmer) {
+        //         return $query->where('farmer_id', $farmer->id);
+        //     } else {
+        //         // No farmer profile, return empty query
+        //         return $query->whereRaw('1 = 0');
+        //     }
+        // }
+
+        return $query;
     }
 }
