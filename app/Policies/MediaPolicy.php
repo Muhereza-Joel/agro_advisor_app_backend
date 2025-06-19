@@ -2,20 +2,20 @@
 
 namespace App\Policies;
 
-// Ensure the correct namespace for Media is imported
-
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 use TomatoPHP\FilamentMediaManager\Models\Media;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class MediaPolicy
 {
+    use HandlesAuthorization;
+
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->can('view_any_media');
     }
 
     /**
@@ -23,7 +23,7 @@ class MediaPolicy
      */
     public function view(User $user, Media $media): bool
     {
-        return false;
+        return $user->can('view_media');
     }
 
     /**
@@ -31,7 +31,7 @@ class MediaPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->can('create_media');
     }
 
     /**
@@ -39,7 +39,7 @@ class MediaPolicy
      */
     public function update(User $user, Media $media): bool
     {
-        return false;
+        return $user->can('update_media');
     }
 
     /**
@@ -47,22 +47,62 @@ class MediaPolicy
      */
     public function delete(User $user, Media $media): bool
     {
-        return false;
+        return $user->can('delete_media');
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Determine whether the user can bulk delete.
      */
-    public function restore(User $user, Media $media): bool
+    public function deleteAny(User $user): bool
     {
-        return false;
+        return $user->can('delete_any_media');
     }
 
     /**
-     * Determine whether the user can permanently delete the model.
+     * Determine whether the user can permanently delete.
      */
     public function forceDelete(User $user, Media $media): bool
     {
-        return false;
+        return $user->can('force_delete_media');
+    }
+
+    /**
+     * Determine whether the user can permanently bulk delete.
+     */
+    public function forceDeleteAny(User $user): bool
+    {
+        return $user->can('force_delete_any_media');
+    }
+
+    /**
+     * Determine whether the user can restore.
+     */
+    public function restore(User $user, Media $media): bool
+    {
+        return $user->can('restore_media');
+    }
+
+    /**
+     * Determine whether the user can bulk restore.
+     */
+    public function restoreAny(User $user): bool
+    {
+        return $user->can('restore_any_media');
+    }
+
+    /**
+     * Determine whether the user can replicate.
+     */
+    public function replicate(User $user, Media $media): bool
+    {
+        return $user->can('replicate_media');
+    }
+
+    /**
+     * Determine whether the user can reorder.
+     */
+    public function reorder(User $user): bool
+    {
+        return $user->can('reorder_media');
     }
 }

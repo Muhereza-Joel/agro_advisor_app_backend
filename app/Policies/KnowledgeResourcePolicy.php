@@ -2,18 +2,20 @@
 
 namespace App\Policies;
 
-use App\Models\KnowledgeResource;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Models\KnowledgeResource;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class KnowledgeResourcePolicy
 {
+    use HandlesAuthorization;
+
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasPermissionTo('view_any_knowledge');
+        return $user->can('view_any_knowledge');
     }
 
     /**
@@ -21,7 +23,7 @@ class KnowledgeResourcePolicy
      */
     public function view(User $user, KnowledgeResource $knowledgeResource): bool
     {
-        return $user->hasPermissionTo('view_knowledge');
+        return $user->can('view_knowledge');
     }
 
     /**
@@ -29,7 +31,7 @@ class KnowledgeResourcePolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasPermissionTo('create_knowledge');
+        return $user->can('create_knowledge');
     }
 
     /**
@@ -37,7 +39,7 @@ class KnowledgeResourcePolicy
      */
     public function update(User $user, KnowledgeResource $knowledgeResource): bool
     {
-        return $user->hasPermissionTo('update_knowledge');
+        return $user->can('update_knowledge');
     }
 
     /**
@@ -45,62 +47,62 @@ class KnowledgeResourcePolicy
      */
     public function delete(User $user, KnowledgeResource $knowledgeResource): bool
     {
-        return $user->hasPermissionTo('delete_knowledge');
+        return $user->can('delete_knowledge');
     }
 
     /**
-     * Determine whether the user can delete any models.
+     * Determine whether the user can bulk delete.
      */
     public function deleteAny(User $user): bool
     {
-        return $user->hasPermissionTo('delete_any_knowledge');
+        return $user->can('delete_any_knowledge');
     }
 
     /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, KnowledgeResource $knowledgeResource): bool
-    {
-        return $user->hasPermissionTo('restore_knowledge');
-    }
-
-    /**
-     * Determine whether the user can restore any models.
-     */
-    public function restoreAny(User $user): bool
-    {
-        return $user->hasPermissionTo('restore_any_knowledge');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
+     * Determine whether the user can permanently delete.
      */
     public function forceDelete(User $user, KnowledgeResource $knowledgeResource): bool
     {
-        return $user->hasPermissionTo('force_delete_knowledge');
+        return $user->can('force_delete_knowledge');
     }
 
     /**
-     * Determine whether the user can permanently delete any models.
+     * Determine whether the user can permanently bulk delete.
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->hasPermissionTo('force_delete_any_knowledge');
+        return $user->can('force_delete_any_knowledge');
     }
 
     /**
-     * Determine whether the user can replicate user.
+     * Determine whether the user can restore.
      */
-    public function replicate(User $user): bool
+    public function restore(User $user, KnowledgeResource $knowledgeResource): bool
     {
-        return $user->hasPermissionTo('replicate_knowledge');
+        return $user->can('restore_knowledge');
     }
 
     /**
-     * Determine whether the user can reorder user.
+     * Determine whether the user can bulk restore.
+     */
+    public function restoreAny(User $user): bool
+    {
+        return $user->can('restore_any_knowledge');
+    }
+
+    /**
+     * Determine whether the user can replicate.
+     */
+    public function replicate(User $user, KnowledgeResource $knowledgeResource): bool
+    {
+        return $user->can('replicate_knowledge');
+    }
+
+    /**
+     * Determine whether the user can reorder.
      */
     public function reorder(User $user): bool
     {
-        return $user->hasPermissionTo('reorder_knowledge');
+        return $user->can('reorder_knowledge');
     }
 }

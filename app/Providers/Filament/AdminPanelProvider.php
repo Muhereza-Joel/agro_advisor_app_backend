@@ -29,6 +29,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('dashboard')
             ->path('dashboard')
             ->login()
+            ->spa()
             ->darkMode(false)
             ->colors([
                 'primary' => Color::Green,
@@ -65,7 +66,7 @@ class AdminPanelProvider extends PanelProvider
             ])->brandName('')
             ->favicon(asset('images/favicon.png'))
             ->plugins([
-                \TomatoPHP\FilamentMediaManager\FilamentMediaManagerPlugin::make()->allowSubFolders()->allowUserAccess(),
+                \TomatoPHP\FilamentMediaManager\FilamentMediaManagerPlugin::make()->allowSubFolders(),
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 TableLayoutTogglePlugin::make(),
             ]);

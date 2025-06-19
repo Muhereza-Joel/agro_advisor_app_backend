@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\FarmRecord;
+use App\Models\Appointment;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class FarmRecordPolicy
+class AppointmentPolicy
 {
     use HandlesAuthorization;
 
@@ -15,15 +15,15 @@ class FarmRecordPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_farm::record');
+        return $user->can('view_any_appointment');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, FarmRecord $farmRecord): bool
+    public function view(User $user, Appointment $appointment): bool
     {
-        return $user->can('view_farm::record');
+        return $user->can('view_appointment');
     }
 
     /**
@@ -31,23 +31,23 @@ class FarmRecordPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_farm::record');
+        return $user->can('create_appointment');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, FarmRecord $farmRecord): bool
+    public function update(User $user, Appointment $appointment): bool
     {
-        return $user->can('update_farm::record');
+        return $user->can('update_appointment');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, FarmRecord $farmRecord): bool
+    public function delete(User $user, Appointment $appointment): bool
     {
-        return $user->can('delete_farm::record');
+        return $user->can('delete_appointment');
     }
 
     /**
@@ -55,15 +55,15 @@ class FarmRecordPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_farm::record');
+        return $user->can('delete_any_appointment');
     }
 
     /**
      * Determine whether the user can permanently delete.
      */
-    public function forceDelete(User $user, FarmRecord $farmRecord): bool
+    public function forceDelete(User $user, Appointment $appointment): bool
     {
-        return $user->can('force_delete_farm::record');
+        return $user->can('force_delete_appointment');
     }
 
     /**
@@ -71,15 +71,15 @@ class FarmRecordPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_farm::record');
+        return $user->can('force_delete_any_appointment');
     }
 
     /**
      * Determine whether the user can restore.
      */
-    public function restore(User $user, FarmRecord $farmRecord): bool
+    public function restore(User $user, Appointment $appointment): bool
     {
-        return $user->can('restore_farm::record');
+        return $user->can('restore_appointment');
     }
 
     /**
@@ -87,15 +87,15 @@ class FarmRecordPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_farm::record');
+        return $user->can('restore_any_appointment');
     }
 
     /**
      * Determine whether the user can replicate.
      */
-    public function replicate(User $user, FarmRecord $farmRecord): bool
+    public function replicate(User $user, Appointment $appointment): bool
     {
-        return $user->can('replicate_farm::record');
+        return $user->can('replicate_appointment');
     }
 
     /**
@@ -103,6 +103,6 @@ class FarmRecordPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_farm::record');
+        return $user->can('reorder_appointment');
     }
 }

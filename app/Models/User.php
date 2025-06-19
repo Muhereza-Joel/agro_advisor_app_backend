@@ -54,4 +54,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Farmer::class);
     }
+
+    public function vet()
+    {
+        return $this->hasOne(VeterinaryOfficer::class);
+    }
 }

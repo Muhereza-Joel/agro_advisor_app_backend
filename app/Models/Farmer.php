@@ -67,4 +67,14 @@ class Farmer extends Model implements HasMedia
     {
         return $this->hasMany(FarmRecord::class);
     }
+
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class);
+    }
+
+    public function chairpersonAppointments()
+    {
+        return $this->hasMany(Appointment::class, 'chairperson_id');
+    }
 }

@@ -2,18 +2,20 @@
 
 namespace App\Policies;
 
-use App\Models\Subcounty;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Models\Subcounty;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class SubcountyPolicy
 {
+    use HandlesAuthorization;
+
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasPermissionTo('view_any_subcounty');
+        return $user->can('view_any_subcounty');
     }
 
     /**
@@ -21,7 +23,7 @@ class SubcountyPolicy
      */
     public function view(User $user, Subcounty $subcounty): bool
     {
-        return $user->hasPermissionTo('view_subcounty');
+        return $user->can('view_subcounty');
     }
 
     /**
@@ -29,7 +31,7 @@ class SubcountyPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasPermissionTo('create_subcounty');
+        return $user->can('create_subcounty');
     }
 
     /**
@@ -37,7 +39,7 @@ class SubcountyPolicy
      */
     public function update(User $user, Subcounty $subcounty): bool
     {
-        return $user->hasPermissionTo('update_subcounty');
+        return $user->can('update_subcounty');
     }
 
     /**
@@ -45,62 +47,62 @@ class SubcountyPolicy
      */
     public function delete(User $user, Subcounty $subcounty): bool
     {
-        return $user->hasPermissionTo('delete_subcounty');
+        return $user->can('delete_subcounty');
     }
 
     /**
-     * Determine whether the user can delete any models.
+     * Determine whether the user can bulk delete.
      */
     public function deleteAny(User $user): bool
     {
-        return $user->hasPermissionTo('delete_any_subcounty');
+        return $user->can('delete_any_subcounty');
     }
 
     /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Subcounty $subcounty): bool
-    {
-        return $user->hasPermissionTo('restore_subcounty');
-    }
-
-    /**
-     * Determine whether the user can restore any models.
-     */
-    public function restoreAny(User $user): bool
-    {
-        return $user->hasPermissionTo('restore_any_subcounty');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
+     * Determine whether the user can permanently delete.
      */
     public function forceDelete(User $user, Subcounty $subcounty): bool
     {
-        return $user->hasPermissionTo('force_delete_subcounty');
+        return $user->can('force_delete_subcounty');
     }
 
     /**
-     * Determine whether the user can permanently delete any models.
+     * Determine whether the user can permanently bulk delete.
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->hasPermissionTo('force_delete_any_subcounty');
+        return $user->can('force_delete_any_subcounty');
     }
 
     /**
-     * Determine whether the user can replicate user.
+     * Determine whether the user can restore.
      */
-    public function replicate(User $user): bool
+    public function restore(User $user, Subcounty $subcounty): bool
     {
-        return $user->hasPermissionTo('replicate_subcounty');
+        return $user->can('restore_subcounty');
     }
 
     /**
-     * Determine whether the user can reorder user.
+     * Determine whether the user can bulk restore.
+     */
+    public function restoreAny(User $user): bool
+    {
+        return $user->can('restore_any_subcounty');
+    }
+
+    /**
+     * Determine whether the user can replicate.
+     */
+    public function replicate(User $user, Subcounty $subcounty): bool
+    {
+        return $user->can('replicate_subcounty');
+    }
+
+    /**
+     * Determine whether the user can reorder.
      */
     public function reorder(User $user): bool
     {
-        return $user->hasPermissionTo('reorder_subcounty');
+        return $user->can('reorder_subcounty');
     }
 }
