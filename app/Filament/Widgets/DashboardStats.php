@@ -19,26 +19,31 @@ class DashboardStats extends BaseWidget
         return [
             Stat::make('Total Users', User::count())
                 ->description('All users')
-                ->icon('heroicon-o-user-group'),
+                ->icon('heroicon-o-user-group')
+                ->url(route('filament.dashboard.resources.users.index')),
 
             Stat::make('Diseases', Disease::count())
                 ->description('All diseases')
-                ->icon('heroicon-o-bug-ant'),
+                ->icon('heroicon-o-bug-ant')
+                ->url(route('filament.dashboard.resources.diseases.index')),
 
             Stat::make('Outbreak Alerts', OutbreakAlert::count())
                 ->description('Recent alerts')
                 ->icon('heroicon-o-exclamation-triangle')
-                ->color('danger'),
+                ->color('danger')
+                ->url(route('filament.dashboard.resources.disease-outbreak-alerts.index')),
 
             Stat::make('Disease Reports', DiseaseReport::count())
                 ->description('Submitted reports')
                 ->icon('heroicon-o-clipboard-document-check')
-                ->color('warning'),
+                ->color('warning')
+                ->url(route('filament.dashboard.resources.disease-reports.index')),
 
             Stat::make('Questions', Advisory::count())
                 ->description('User inquiries')
                 ->icon('heroicon-o-question-mark-circle')
                 ->color('primary')
+                ->url(route('filament.dashboard.resources.questions.index')),
 
         ];
     }
