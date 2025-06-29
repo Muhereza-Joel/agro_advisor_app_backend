@@ -17,7 +17,7 @@ class DiseaseCategoryResource extends Resource
 {
     protected static ?string $model = DiseaseCategory::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-folder-open';
 
     protected static ?int $navigationSort = 4;
 

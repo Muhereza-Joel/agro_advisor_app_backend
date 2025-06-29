@@ -17,7 +17,7 @@ class FarmRecordResource extends Resource
 {
     protected static ?string $model = FarmRecord::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-archive-box';
 
     protected static ?int $navigationSort = 8;
 

@@ -17,7 +17,7 @@ class OutbreakAlertResource extends Resource
 {
     protected static ?string $model = OutbreakAlert::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-bell-alert';
 
     protected static ?int $navigationSort = 11;
 
