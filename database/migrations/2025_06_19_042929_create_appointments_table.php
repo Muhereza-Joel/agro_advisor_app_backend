@@ -9,8 +9,8 @@ return new class extends Migration {
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('farmer_id')->constrained()->onDelete('cascade');
-            $table->foreignId('veterinary_officer_id')->constrained('users')->onDelete('cascade'); // user with chairperson role
+            $table->unsignedBigInteger('farmer_id'); // Just reference, no FK constraint
+            $table->unsignedBigInteger('veterinary_officer_id'); // Just reference, no FK constraint
             $table->dateTime('scheduled_at'); // appointment datetime
             $table->string('status')->default('pending'); // pending, approved, cancelled, completed
             $table->text('notes')->nullable(); // optional notes or purpose
