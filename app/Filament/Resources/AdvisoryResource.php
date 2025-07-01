@@ -78,7 +78,7 @@ class AdvisoryResource extends Resource
                 Forms\Components\Select::make('status')
                     ->options([
                         'pending' => 'Pending',
-                        'resolved' => 'Resolved',
+                        'responded' => 'Responded',
                     ])
                     ->required(),
                 Forms\Components\Select::make('related_disease_id')
